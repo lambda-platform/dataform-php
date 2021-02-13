@@ -1,5 +1,5 @@
 {
-    "name": "lambda/dataform",
+    "name": "lambda-platform/dataform",
     "description": "Lambda data form auto generation",
     "type": "plugin",
     "license": "MIT",
