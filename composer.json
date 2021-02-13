@@ -7,6 +7,10 @@
         {
             "name": "n0m4dz",
             "email": "tseegii.it@gmail.com"
+        },
+        {
+            "name": "munkh-altai",
+            "email": "munkaltai@gmail.com"
         }
     ],
     "minimum-stability": "stable",
@@ -18,5 +22,14 @@
             "Puzzle": "Lambda\\Dataform\\Dataform"
         }
     },
-    "require": {}
+    "autoload": {
+        "psr-4": {
+            "Lambda\\Dataform\\": "src"
+        }
+
+    },
+    "require": {
+        "illuminate/database": "^5.7",
+        "illuminate/hashing": "^5.7"
+    }
 }
