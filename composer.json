@@ -19,7 +19,7 @@
             "Lambda\\Dataform\\DataformServiceProvider"
         ],
         "aliases": {
-            "Puzzle": "Lambda\\Dataform\\Dataform"
+            "Puzzle": "Lambda\\Dataform\\"
         }
     },
     "autoload": {
