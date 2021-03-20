@@ -3,9 +3,10 @@
 namespace Lambda\Dataform;
 
 use Illuminate\Support\Facades\Validator;
-use Image;
+use Intervention\Image\Facades\Image;
 use Compress;
-use File;
+use Illuminate\Support\Facades\File;
+use Illuminate\Http\Request;
 
 trait FileManager
 {
