@@ -62,7 +62,7 @@ trait FileManager
     {
         $t = new self();
         $file = request()->file('file');
-        $file_type = "/assets/cyber/images";
+        $file_type = "images";
         $rules = [
             'file' => 'mimes:JPG,PNG,GIF,JPEG,png,gif,jpeg,jpg|max:20000000',
         ];
