@@ -2,6 +2,7 @@
 
 namespace Lambda\Dataform;
 
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Facades\Image;
 use Compress;
@@ -10,8 +11,9 @@ use Illuminate\Http\Request;
 
 trait FileManager
 {
-    public function makeUploadable($file, $file_type)
+    public function makeUploadable($file, $file_type): array
     {
+        $config = Config::get('lambda');
         $base_dir = $file_type;
         $uploadDir = DIRECTORY_SEPARATOR . 'uploaded' . DIRECTORY_SEPARATOR . $base_dir . DIRECTORY_SEPARATOR . date('Y') . DIRECTORY_SEPARATOR . date('M') . DIRECTORY_SEPARATOR;
         $destinationPath = public_path() . $uploadDir;
@@ -38,13 +40,13 @@ trait FileManager
             $uploadSuccess = Image::make($file->getRealPath());
             $width = $uploadSuccess->width();
             if($width > 800) {
-                $uploadSuccess = $uploadSuccess->resize(800, null, function ($constraint) {
+                $uploadSuccess = $uploadSuccess->resize($config['img_width'], null, function ($constraint) {
                     $constraint->aspectRatio();
                 });
             }
-            $uploadSuccess->save($destinationPath . $fileName);
+            $uploadSuccess->save($destinationPath . $fileName, $config['img_quality']);
 
-            $thumb_image = $uploadSuccess->resize(350, null, function ($constraint) {
+            $thumb_image = $uploadSuccess->resize($config['img_thumb_width'], null, function ($constraint) {
                 $constraint->aspectRatio();
             });
             $thumb_image->save($thumbPath . $fileName);
