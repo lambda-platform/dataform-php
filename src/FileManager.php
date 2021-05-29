@@ -22,16 +22,17 @@ trait FileManager
             mkdir($destinationPath, 0755, true);
         }
 
-        $fileName = $file->getClientOriginalName();
+        $fileName = str_replace('#', "-", $file->getClientOriginalName());
+        $fileName = str_replace('/', "-", $fileName);
         $uploadFile = $destinationPath . $fileName;
 
         $i = 0;
         while (File::exists($uploadFile)) {
-            $fileName = ++$i . '-' . $file->getClientOriginalName();
+            $fileName = ++$i . '-' . $fileName;
             $uploadFile = $destinationPath . $fileName;
         }
 
-        if($file_type == 'images') {
+        if ($file_type == 'images') {
             $thumbPath = $destinationPath . DIRECTORY_SEPARATOR . 'thumb' . DIRECTORY_SEPARATOR;
             if (!is_dir($thumbPath)) {
                 mkdir($thumbPath, 0755, true);
@@ -39,7 +40,7 @@ trait FileManager
 
             $uploadSuccess = Image::make($file->getRealPath());
             $width = $uploadSuccess->width();
-            if($width > 800) {
+            if ($width > 800) {
                 $uploadSuccess = $uploadSuccess->resize($config['img_width'], null, function ($constraint) {
                     $constraint->aspectRatio();
                 });
@@ -50,7 +51,7 @@ trait FileManager
                 $constraint->aspectRatio();
             });
             $thumb_image->save($thumbPath . $fileName);
-        }else{
+        } else {
             $file->move($destinationPath, $fileName);
         }
 
@@ -84,7 +85,7 @@ trait FileManager
             $file_type = "videos";
         }
 
-        if ($ext == 'mp3'|| $ext == 'MP3') {
+        if ($ext == 'mp3' || $ext == 'MP3') {
             $rules = [
                 'file' => 'mimes:application/octet-stream,audio/mpeg,mpga,mp3,wav|max:40000000',
             ];
