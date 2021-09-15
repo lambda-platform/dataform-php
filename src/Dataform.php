@@ -113,6 +113,10 @@ class Dataform extends Facade
     public function store($data, $subforms)
     {
         $data = $this->callTrigger('beforeInsert', $data);
+        if($data->has_response){
+            return $data->response;
+        }
+
         $qr = DB::table($this->dbSchema->model);
 
 //        $r = isset($data['id']) ? $qr->insert($data) : $qr->insertGetId($data);

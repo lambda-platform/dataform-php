@@ -68,7 +68,7 @@ trait FileManager
         $file = request()->file('file');
         $file_type = "images";
         $rules = [
-            'file' => 'mimes:JPG,PNG,GIF,JPEG,png,gif,jpeg,jpg|max:20000000',
+            'file' => 'mimes:JPG,PNG,GIF,JPEG,png,gif,jpeg,jpg,webp|max:20000000',
         ];
 
         $ext = $file->getClientOriginalExtension();
