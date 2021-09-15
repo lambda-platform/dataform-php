@@ -113,7 +113,7 @@ class Dataform extends Facade
     public function store($data, $subforms)
     {
         $data = $this->callTrigger('beforeInsert', $data);
-        if($data->has_response){
+        if(isset($data->ignore_exec)){
             return $data->response;
         }
 
