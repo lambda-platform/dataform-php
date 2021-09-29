@@ -120,6 +120,10 @@ class Dataform extends Facade
         $qr = DB::table($this->dbSchema->model);
 
 //        $r = isset($data['id']) ? $qr->insert($data) : $qr->insertGetId($data);
+        if(array_key_exists('id', $data) && $data['id'] == null){
+            unset($data['id']);
+        }
+
         $r = $qr->insert($data);
         if ($r) {
             isset($data['id']) ? $id = $data['id'] : $id = $data['id'] = DB::getPdo()->lastInsertId();;
